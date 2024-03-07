@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6nhx7m5esm2m"]
+
+[ext_resource type="PackedScene" uid="uid://dh8ws4xbh7ljv" path="res://player/player.tscn" id="1_x3os6"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kf1jx"]
+sky_top_color = Color(0.898039, 1, 1, 1)
+sky_horizon_color = Color(0.494118, 0.690196, 0.752941, 1)
+sky_curve = 0.106065
+ground_bottom_color = Color(0.0784314, 0.2, 0.160784, 1)
+ground_horizon_color = Color(0.580392, 0.67451, 0.701961, 1)
+ground_curve = 0.0373213
+
+[sub_resource type="Sky" id="Sky_bi0dw"]
+sky_material = SubResource("ProceduralSkyMaterial_kf1jx")
+
+[sub_resource type="Environment" id="Environment_5o2vh"]
+background_mode = 2
+sky = SubResource("Sky_bi0dw")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ht3jh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sjxn6"]
+albedo_color = Color(0.996078, 0.988235, 0.470588, 1)
+
+[node name="Level1" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5o2vh")
+camera_attributes = SubResource("CameraAttributesPractical_ht3jh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.856402, 0.516309, 0, -0.516309, 0.856402, 0, 10.7821, 11.7273)
+light_energy = 0.838
+shadow_enabled = true
+
+[node name="env" type="Node3D" parent="."]
+
+[node name="floor" type="CSGBox3D" parent="env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.5, 2.08165e-12)
+use_collision = true
+size = Vector3(51, 1, 26)
+material = SubResource("StandardMaterial3D_sjxn6")
+
+[node name="lowPlatform" type="CSGBox3D" parent="env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.4, 4)
+use_collision = true
+size = Vector3(7, 1, 5)
+
+[node name="highPlatform" type="CSGBox3D" parent="env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1.5, 4)
+use_collision = true
+size = Vector3(7, 1, 5)
+
+[node name="Player" parent="." instance=ExtResource("1_x3os6")]
