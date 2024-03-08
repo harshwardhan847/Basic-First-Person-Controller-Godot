@@ -80,9 +80,16 @@ func _ready():
 	# set default speed
 	set_movement_speed('default')
 	
+	# set global player
+	Global.player = self;
+	
 	CROUCH_SHAPECAST.add_exception($".")
 
 func _physics_process(delta):
+	
+	Global.debug.add_property("Movement Speed",_speed,1);
+	Global.debug.add_property("Mouse Rotation",_mouse_rotation,2);
+	
 	
 	# Update camera movement based on mouse movement
 	_update_camera(delta)
